@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Standard DD] Example Asset — Research Report</title>
+  <meta name="description" content="Sample static report layout for asset-dd skill. Not financial advice." />
+  <style>
+    :root { --bg:#0a0a0b; --fg:#fafafa; --muted:#a1a1aa; --accent:#10b981; --border:#27272a; }
+    * { box-sizing: border-box; }
+    body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem; }
+    h1 { font-size: 1.5rem; margin-bottom: .25rem; }
+    .meta { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
+    .tldr { background: #18181b; border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+    .verdict { color: var(--accent); font-weight: 600; }
+    details { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; padding: .75rem 1rem; }
+    summary { cursor: pointer; font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; font-size: .875rem; margin: 1rem 0; }
+    th, td { border-bottom: 1px solid var(--border); padding: .5rem .25rem; text-align: left; }
+    .disclaimer { color: var(--muted); font-size: .8rem; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Example Asset — Standard DD</h1>
+  <p class="meta">Depth: Standard · As-of: 2026-05-30T12:00Z · <span class="verdict">Verdict: watch only</span></p>
+
+  <div class="tldr">
+    <strong>TL;DR</strong>
+    <ul>
+      <li>Replace this block with ≤8 lines: object, verdict, key risk, key catalyst.</li>
+      <li>Put provenance table <em>after</em> TL;DR (folded below).</li>
+      <li>See <code>references/report-template.md</code> for full sections.</li>
+    </ul>
+  </div>
+
+  <h2>0. Recommendation</h2>
+  <p>Action bucket: watch only. Not financial advice.</p>
+
+  <h2>4. Mechanism (elevator)</h2>
+  <p><strong>Money in:</strong> …</p>
+  <p><strong>Money out:</strong> …</p>
+  <p><strong>Alpha variable:</strong> …</p>
+
+  <details>
+    <summary>Data provenance table (click to expand)</summary>
+    <table>
+      <thead><tr><th>Claim</th><th>Source</th><th>As-of UTC</th><th>Conf.</th></tr></thead>
+      <tbody>
+        <tr><td>Mcap</td><td>CoinGecko API URL</td><td>2026-05-30T12:00Z</td><td>H</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <p class="disclaimer">Template for asset-dd-and-opportunity-evaluation v2.1. Replace all placeholders before publish.</p>
+</body>
+</html>
