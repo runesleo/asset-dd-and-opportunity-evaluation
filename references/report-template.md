@@ -301,6 +301,14 @@ Use one of the two modes below. Default to Single-Asset Mode unless the task exp
 - Catalyst calendar:
 - Kill conditions for the relationship thesis:
 
+### Post-trade addendum（可选 · 公开 HTML）
+
+> 作者事后有实盘且愿意披露时追加；**须与报告 Verdict 分离**，写清边界。
+
+- **What happened（事实）：** venue · open/close UTC · size（可区间）· realized PnL（可选）
+- **Boundary（必填）：** 个人记录 · **非**对读者的交易指令 · 盈利 ≠ 验证 Verdict · 不构成投资建议
+- **Data freeze：** 正文行情/结论时点**不变**；后记不触发全文重拉 API（除非另开 revision）
+
 ### Appendix A — Five-pillar self-check（可选；若对比涉及单标的深度则按 Mode A 支柱逐资产压缩）
 
 ---

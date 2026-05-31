@@ -1,18 +1,72 @@
 # asset-dd-and-opportunity-evaluation
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Institutional-grade asset due diligence workflow for AI coding agents (Claude Code, Cursor, Codex, etc.).
 
-**Default depth:** Standard — five pillars, competitive set, on-chain proxy, provenance table, separate investment vs speculation theses, participation buckets.
+**中文文档：** [README.zh.md](./README.zh.md)
+
+**Default depth:** Standard — five pillars, competitive set, on-chain proxy, provenance table, separate investment vs speculation theses.
+
+---
+
+## What you get
+
+- **Structured DD checklist** — Quick / Standard / Full tiers in `SKILL.md`
+- **Report scaffold** — `references/report-template.md` with provenance table and §2.5–4.6
+- **Pluggable data sources** — `references/tool-adapters.md` (no vendor lock-in)
+- **Public samples** — APR HTML on leolabs + Pearl excerpt in `examples/`
+- **Optional author overlay** — `references/leo-extensions.md` (delete on fork)
+
+---
+
+## How it works
+
+```text
+User: "DD this token / 尽调 APR"
+  → Agent reads SKILL.md
+  → Picks tier (default Standard)
+  → Fills report-template.md (Markdown or HTML)
+  → Every claim: source URL + UTC as-of + ✅/⚠️/➖ on five pillars
+```
+
+**Not included:** live price feeds, auto-trading, or investment advice.
+
+---
+
+## Paths
+
+| Path | For |
+|------|-----|
+| **Open Core (this repo)** | Clone → copy into your agent skills folder |
+| **[Sample report](https://leolabs.me/research/apr-apriori-2026-05/report.html)** | See output quality first |
+| **[leolabs.me/tools/asset-dd](https://leolabs.me/tools/asset-dd)** | Pro Pack zip · on-demand Run (optional paid paths) |
+
+Pricing (2026-05): Standard Run $12 · Full Run $35 · Pro Pack $45 — details on the product page, not required for self-host.
 
 ---
 
 ## Quick start
 
-1. Copy this folder into your agent's skills directory (Claude Code, Cursor, Codex, etc.).
-2. Invoke when the user asks: *DD / due diligence / is this asset worth buying / research this token*.
-3. Agent reads `SKILL.md` → executes workflow → outputs report using `references/report-template.md`.
+```bash
+git clone https://github.com/runesleo/asset-dd-and-opportunity-evaluation.git
+# Copy into your agent skills directory, then invoke:
+# "Run a Standard DD on <ticker>"
+```
 
-**Optional:** Delete or replace `references/leo-extensions.md` (author-specific portfolio/KOL tooling).
+1. Copy this folder into Claude Code / Cursor / Codex skills path.
+2. Trigger on: *DD / due diligence / is this worth buying / 尽调*.
+3. Agent reads `SKILL.md` → outputs using `references/report-template.md`.
+
+**Fork:** delete or replace `references/leo-extensions.md` · run `bash scripts/fork-preflight.sh`
+
+---
+
+## Requirements
+
+- Any agent that can read local skill files and follow Markdown instructions
+- **Data:** your own API keys / browser tools per `tool-adapters.md` (CoinGecko, exchange APIs, X search, etc.)
+- **Privacy:** if you use browser-cookie or logged-in dashboards, that stays on your machine — not shipped in this repo
 
 ---
 
@@ -20,9 +74,39 @@ Institutional-grade asset due diligence workflow for AI coding agents (Claude Co
 
 | Tier | When | Output |
 |------|------|--------|
-| **Quick** | User explicitly asks for a fast scan | `[Quick DD]` · object + mechanism + risks + verdict |
+| **Quick** | User asks for a fast scan | `[Quick DD]` |
 | **Standard** | Default | Full checklist through §2.5–4.6 |
-| **Full** | Deep dive / publish | Standard + ≥4 comps + bull/base/bear scenarios + dual-source cross-check |
+| **Full** | Deep dive / publish | + ≥4 comps + bull/base/bear + dual-source cross-check |
+
+---
+
+## Verified
+
+| Run | Tier | Evidence |
+|-----|------|----------|
+| APR / aPriori | Standard → public HTML | [leolabs report](https://leolabs.me/research/apr-apriori-2026-05/report.html) · `RUNS.md` #1 |
+| Pearl $PRL | Standard excerpt | `examples/pearl-standard-dd-excerpt.md` |
+
+See full ledger: [`RUNS.md`](./RUNS.md)
+
+---
+
+## Known limitations (v2.1)
+
+- Website has **one** full public HTML sample (APR); second sample planned — `references/roadmap-v2.md`
+- Unlock calendars often ⚠️ blocked without paid data vendors
+- `leo-extensions.md` is author-specific; not required for core workflow
+- Pro Pack zip is **not** in this repo (delivered separately via leolabs)
+
+---
+
+## Roadmap
+
+- [ ] Second public sample (English Full or on-chain failure case)
+- [ ] Pearl full HTML on leolabs research hub
+- [ ] Template v2.1+ first-screen TL;DR enforced in all exports — see `references/reader-guide.md`
+
+Details: `references/roadmap-v2.md`
 
 ---
 
@@ -30,55 +114,31 @@ Institutional-grade asset due diligence workflow for AI coding agents (Claude Co
 
 ```
 asset-dd-and-opportunity-evaluation/
-├── SKILL.md                          # Core workflow (portable)
+├── SKILL.md
 ├── README.md / README.zh.md
-├── LICENSE
-├── OPEN-SOURCE.md
-├── RUNS.md                           # Documented production runs
-├── references/
-│   ├── report-template.md
-│   ├── professional-pillars.md
-│   ├── tool-adapters.md              # Pluggable data sources
-│   ├── leo-extensions.md             # Optional author overlay
-│   ├── rwa-composability-tier.md
-│   └── roadmap-v2.md
-└── examples/
-    └── pearl-standard-dd-excerpt.md
+├── CHANGELOG.md
+├── LICENSE · OPEN-SOURCE.md · RUNS.md
+├── references/          # templates, adapters, reader-guide
+├── examples/            # sanitized excerpts
+└── scripts/fork-preflight.sh
 ```
 
 ---
 
-## Public examples
+## About the author
 
-| Asset | Format | Link |
-|-------|--------|------|
-| APR / aPriori | Full HTML report | [leolabs.me/research/apr-apriori-2026-05/report.html](https://leolabs.me/research/apr-apriori-2026-05/report.html) |
-| Pearl $PRL | Standard DD excerpt (sanitized) | `examples/pearl-standard-dd-excerpt.md` |
-| Layout starter | Minimal static HTML | `examples/report-starter.html` |
+*Leo ([@runes_leo](https://x.com/runes_leo)) — AI × Crypto independent builder. Trading on [Polymarket](https://polymarket.com/?via=runes-leo&r=runesleo&utm_source=github&utm_content=asset-dd-and-opportunity-evaluation), building data and content pipelines with Claude Code and Codex.*
 
-**Reading dense reports:** see `references/reader-guide.md`.
+*[leolabs.me](https://leolabs.me) — writing · community · open-source tools · indie projects*
 
-**Known gap (pre-launch):** website currently has **one** live HTML sample (APR). A second public sample (English Full or meme/on-chain failure case) improves OSS credibility — tracked in `references/roadmap-v2.md`.
+*[X Subscription](https://x.com/runes_leo/creator-subscriptions/subscribe) — paid content weekly*
 
----
-
-## Design principles
-
-1. **Identify the object first** — platform ≠ token ≠ referral wrapper.
-2. **Facts before narrative** — social discovery generates hypotheses; chain/market data falsifies them.
-3. **No silent gaps** — every pillar is ✅ / ⚠️ / ➖ with reason.
-4. **Investment ≠ speculation** — two separate thesis paragraphs, always.
-5. **Venue depth binds sizing** — portfolio % cap is meaningless if you are 30% of the AMM pool.
+*Learn in public, Build in public.*
 
 ---
 
 ## License
 
-MIT — see `LICENSE`. Sample reports in `examples/` are CC BY 4.0 where noted.
+MIT — see [`LICENSE`](LICENSE). Sample reports in `examples/` are CC BY 4.0 where noted.
 
----
-
-## Changelog
-
-- **2.1.0** (2026-05-30) — Open-source package layout; tool adapters; Leo extensions split; roadmap R1–R3; mcap scenario §3.5
-- **2.0.x** — Standard five-pillar template; APR public HTML; roadmap-v2
+**Changelog:** [`CHANGELOG.md`](CHANGELOG.md)

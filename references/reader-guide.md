@@ -40,7 +40,7 @@
 
 | 报告 | 语言 | 深度 | 可读性备注 |
 |------|------|------|------------|
-| APR / aPriori | 中文 | Standard | 数据完整；首屏略重 — 改版时按本节收紧 |
+| APR / aPriori | 中文 | Standard | v2：首屏 TL;DR + 溯源折叠 + 2026-05-30 实盘后记 |
 | Pearl excerpt | 中文 | Standard | 脱敏 excerpt；float 数字带 ⚠️ caveat |
 
 **缺口（开源 credibility）**：建议补 **1 篇英文 Full** 或 **1 篇 meme/on-chain 失败案例**。见 `roadmap-v2.md`。

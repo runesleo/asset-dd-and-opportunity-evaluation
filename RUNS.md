@@ -5,7 +5,7 @@
 
 | # | Asset | Date | Tier | Evidence | Notes |
 |---|-------|------|------|----------|-------|
-| 1 | **APR / aPriori** | 2026-04-30, 2026-05-12 | Full → published | [leolabs HTML](https://leolabs.me/research/apr-apriori-2026-05/report.html) · `leolabs-research-bundle` | Gold standard · first public HTML |
+| 1 | **APR / aPriori** | 2026-04-30, 2026-05-12 | Standard → published | [leolabs HTML](https://leolabs.me/research/apr-apriori-2026-05/report.html) | Gold standard · v2 可读性 2026-05-30 · author BN perp closed ~+$428（后记，非推荐） |
 | 2 | **Universal Foundation / WTF** | 2026-04-25 | Process | vault topic `asset-dd-skill-3-rounds` | 4-round verdict flip · origin story with Codex |
 | 3 | **Pearl $PRL** | 2026-05-29–30 | Standard + Round 2 | `examples/pearl-standard-dd-excerpt.md` | Together ✅ · a16z ❌ · §3.5 mcap |
 | 4 | **Arbuz** | ~2026-05 | Standard-ish | alkanes-arbuz-monitor docs | Alkanes treasury narrative |
