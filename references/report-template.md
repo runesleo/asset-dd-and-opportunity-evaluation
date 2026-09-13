@@ -1,316 +1,379 @@
-# Asset DD Report Template
+# Asset DD Report Template — Action-First v3
 
-与 `SKILL.md` 及 `references/professional-pillars.md` 对齐。**默认 Standard depth**；若产出为 Quick / Full，须在 Metadata 中显式标注。
+Semantic version: `action-first-2026-09-13-v1`
 
-Use one of the two modes below. Default to Single-Asset Mode unless the task explicitly compares or screens across multiple assets / markets.
+与 `SKILL.md` 对齐。默认仍可做 Standard DD，但 fast/tradable asset 必须先给 **Phase-A Decision Snapshot**，不能等完整报告写完才出现可执行结论。
 
 ---
 
-## Mode A — Single-Asset Report
+# Mode A — Single Asset
 
-### Metadata（必填）
+## Metadata
 
-- **Depth tier:** `[Quick DD]` / **Standard（默认）** / `[Full DD]`
-- **Report as-of (UTC):** `YYYY-MM-DDTHH:MMZ`（精确到分钟为佳）
-- **Analyst note:** 若某支柱整段为 ➖，须写 **「非适用原因」** 或 **「已尝试，blocked」**（禁止静默留白）
-- **Public URL / 外发**（若适用）：可加 **≤8 行「如何阅读 / TL;DR」** 于溯源表之前；正文 **禁止**出现 `asset-dd`、Claude/Codex 等内部工具名（见 `SKILL.md` Public-facing 节）。若导出独立 HTML：建议 **`twitter:description`** 与 **`og:description`** 同文，便于 X 卡片摘要。
-- **首屏可读性（v2.1+）**：Metadata 之后 **≤400 字内** 必须出现 **TL;DR + Verdict + 至少 1 张关键图或核心表**；**溯源表默认后置**（HTML 用 `<details>` 折叠）。见 `references/reader-guide.md`。
+- **Depth tier:** Phase-A / Quick / Standard / Full
+- **Report as-of (UTC):** `YYYY-MM-DDTHH:MMZ`
+- **Decision horizon:** 24h / 72h / 7d / longer
+- **Canonical identity:** chain + exact contract/mint/stock code/route
+- **Semantic version:** `action-first-2026-09-13-v1`
 
-### Data provenance table（必填，独立小节）
+---
 
-| Claim | Source (URL or API name) | As-of (UTC) | Confidence (H/M/L) |
-|-------|----------------------------|---------------|----------------------|
-| Mcap / FDV / circ supply | | | |
-| Unlock / vesting conclusion | | | |
-| Primary venue volume / depth | | | |
-| On-chain proxy (if applicable) | | | |
-| … | | | |
+## 0. Phase-A Decision Snapshot — first screen
 
-### 0. Recommendation First
+This section comes before the long provenance/detail sections for a fast or tradable opportunity.
 
-- Verdict:
-- Opportunity type: long-term compounding / medium-term thematic / short-term momentum / one-shot gamble
-- Action bucket: avoid / watch only / research position / tiny speculative position / conviction position
-- Suggested sizing:（凡写 `%T` 或美元试探上限，**同小节**须写防火墙句：**非对任何读者的仓位或交易建议**；`T` 为读者自行定义的总资产；以下为作者匿名化自用框架。）
-- Why now:
+### 0.1 Decision
 
-### 1. Asset Identification
+- **Verdict:**
+- **Capital purpose:** `NO_CAPITAL / INFORMATION_CANARY / PREPOSITION / SCALE_REVIEW / HOLD / REDUCE / EXIT`
+- **Suggested bounded band:** `0 / 20U / 50U / 100U / other`
+- **Why now:**
+- **Latest useful decision time / cost of delay:**
+- **Exact owner action required:** `NONE` or one concrete consequential action
 
-- Asset analyzed as:
+No automatic order is implied by this report.
+
+### 0.2 Identity / execution
+
+- Exact asset / route:
+- Primary venue / pool:
+- Fresh quote observed at:
+- Planned small-size buy state:
+- Planned small-size sell / round-trip state:
+- Slippage / impact:
+- Executable exit capacity:
+
+### 0.3 Hard security
+
+- Hard-security state: `PASS / SECURITY_HARD_FAIL / UNKNOWN`
+- Direct evidence:
+- Non-terminal risk tags:
+
+Do not treat generic wash, concentration, same ticker, or missing LP data as a terminal hard fail without direct evidence.
+
+### 0.4 Thesis / counter-thesis
+
+- Strongest **non-price** asymmetric thesis:
+- Strongest counter-thesis:
+- Explicit kill condition:
+
+### 0.5 Probability / payoff
+
+| Scenario | Probability range | Payoff / terminal-value range | Main condition |
+|---|---:|---:|---|
+| Thesis fail | | | |
+| Base success | | | |
+| Strong success | | | |
+| Tail / category winner | | | |
+
+- Executable loss if wrong:
+- Remaining multiple:
+- Market pricing: underpriced / partially priced / priced / over-priced / unknown
+- Information gain from acting now: low / medium / high + why
+- Cost of delay: low / medium / high / critical + why
+
+### 0.6 Auto-checks completed
+
+- [ ] exact identity / first-party binding
+- [ ] hard-security readback
+- [ ] planned-size quote
+- [ ] sellability / exit-capacity
+- [ ] supply / valuation normalization
+- [ ] non-price thesis evidence
+- [ ] creator / holder / overhang check if material
+- [ ] market-data conflict reconciliation if material
+
+### 0.7 Remaining unknowns
+
+| Unknown | Class | What happens next |
+|---|---|---|
+| | `AUTO_RESOLVABLE` | machine attempts now; do not delegate to Leo |
+| | `EXTERNAL_PENDING` | define real future trigger |
+| | `OWNER_GATED` | exact consequential decision after preflight |
+| | `TEMPORARILY_UNOBSERVABLE` | record failover attempts; continue independent lanes |
+
+### 0.8 Scale blockers
+
+- NAV / portfolio fit:
+- planned-size depth:
+- incremental EV:
+- repeatability / economics:
+- supply / unlock / overhang:
+- independent review:
+
+A blocker may prevent **scale** without erasing a valid canary/HOLD/Alpha state.
+
+Forbidden ending: `Next step: verify X` when X is machine-resolvable.
+
+Required ending form: `Auto-checks completed/attempted: X/Y/Z. Remaining owner decision: [exact action]` or `NONE`.
+
+---
+
+## 1. Data Provenance
+
+| Claim | Source | As-of UTC | Confidence | Authority / notes |
+|---|---|---|---|---|
+| Price / executable quote | | | | |
+| Market cap / FDV / supply | | | | |
+| Unlock / vesting | | | | |
+| Primary venue depth | | | | |
+| Onchain / filing proxy | | | | |
+| Social / narrative | | | | signal only |
+
+Exact-contract / exact-route executable data outranks generic ticker aggregation for sizing.
+
+---
+
+## 2. Asset Identification
+
 - What it is:
 - What it is NOT:
-- Canonical identifier:
-  - ticker:
-  - contract / mint / stock code:
-  - chain / exchange / venue:
-- Official links:
-  - website:
-  - docs:
-  - X:
-  - Telegram / Discord:
+- Ticker:
+- Contract / mint / stock code:
+- Chain / venue:
+- Website:
+- Docs:
+- X:
+- TG / Discord:
 
-### 2. Where the Key Data Is Found
+---
 
-- Primary sources:
-- Market data sources:
-- On-chain / filings / registry sources:
-- Social / community sources:
-- What is still missing:
-
-### 2.5 Tokenomics, emissions & unlock attempts（Standard+）
-
-- Circulating / total / max supply; **FDV/Mcap** if both exist:
-- Emissions / inflation (or **「无直接排放 / 未披露」**):
-- **Unlock / vesting — attempt log（至少 2 条路径，写 URL + 结果）**
-  - Attempt 1: … → outcome:
-  - Attempt 2: … → outcome:
-  - If both fail: `⚠️ blocked` + reason（禁止静默省略）
-- **若无日级 unlock 表（Standard+）**：补 **一行最坏线性外推上界**（`(total - circ) / N months` × 参考价，标 **scenario bound not forecast**）。
-
-### 2.6 Competitive set（Standard+, ≥2 peers）
-
-| Peer | One-line positioning vs subject | Numeric anchor (as-of) | **One falsifiable** relative edge or gap |
-|------|-----------------------------------|--------------------------|------------------------------------------|
-| | | | |
-| | | | |
-
-### 3. Hard Facts
+## 3. Hard Facts
 
 - Price / market cap / FDV:
-- Liquidity / volume:
-- Supply structure:
-- Fees / slippage / trading venue:
-- Security / audit / bug bounty:
+- Circulating / total / max supply:
+- Liquidity / volume / depth:
+- Fees / slippage:
+- Admin / upgrade / mint / blacklist permissions:
+- Audit / bug bounty / security facts:
 - Governance / dev activity:
-- Key operating KPIs:
+- Operating KPIs:
 
-### 3.5 Market cap scenario framework（`[Full DD]` 或用户问「能到多少 mcap」）
+Unknown stays UNKNOWN. Never coerce missing data to zero.
 
-- **Primary metric:** circulating market cap（PoW/早期 FDV 常虚高）
-- **Comps table:** ≥3 named peers · narrative · circ mcap · one-line read
-- **Scenarios:**
+---
 
-| Tier | Circ mcap range | What must become true | Falsifier |
-|------|-----------------|-------------------------|-----------|
-| Bear | | | |
-| Base | | | |
-| Bull | | | |
+## 4. Tokenomics / Supply Stress — Standard+
 
-### 3.6 On-chain & holder proxy（Standard+，有合约 / 主链资产时必尝试）
+- Circ / total / max / FDV / market cap / FDV÷Mcap:
+- Emissions / inflation:
+- 90d unlock / vesting:
+- Attempt 1 URL -> outcome:
+- Attempt 2 URL -> outcome:
+- Value capture:
+- Supply overhang vs sustainable demand / buy pressure:
+- If no daily unlock table: scenario-bound extrapolation, explicitly **not forecast**.
 
-- Chosen proxy(es): top holders % / labeled treasury moves / main DEX pool TVL / CEX attestation / Dune or official dashboard
-- Tool path used: explorer API → GeckoTerminal → Dune → Playwright, or `⚠️ blocked` + reason
-- **须写入至少一句带日期的数字**（例：Etherscan Top10 合计约 __% 流通，UTC __ 手读 UI）；**禁止**仅以「读者自行打开 Holders」交差；做不到则整节 `⚠️ blocked` + 已尝试链。
+---
 
-### 4. Mechanism Layer
+## 5. Mechanism Layer
 
-**Elevator (R1 · 开篇两句 · Standard+)**
-- Money in (one verifiable sentence):
-- Money out (one verifiable sentence):
-- If alpha exists, it hangs on this measurable variable:
+### Elevator
 
-- How money comes in:
-- How money leaves:
+- Money in:
+- Money out:
 - Who gets paid:
-- Who is the marginal buyer:
+- Marginal buyer / seller:
 - Main reflexive loop:
 - Main failure mode:
+- Measurable variable on which alpha hangs:
 
-### 5. Social / X / Community Read
+---
 
-- **Heat check (R3 · Standard):** window 7d / 14d · sample links · warming / cooling / flat
+## 6. Competitive Set — Standard+
+
+| Peer | Positioning | Numeric anchor | Relative edge/gap | Falsifier |
+|---|---|---:|---|---|
+| | | | | |
+| | | | | |
+
+- Asset-specific alpha vs category beta:
+
+---
+
+## 7. Onchain / Holder / Market-Structure Proxy — Standard+
+
+- Chosen proxy:
+- Tool/source path:
+- Dated numeric observation:
+- Holder / creator / treasury / LP notes:
+- What is blocked / missing:
+
+Do not substitute a static TVL number for fresh planned-size sellability when the decision depends on exit capacity.
+
+---
+
+## 8. Social / Community Read
+
+- 7d / 14d heat check:
 - Main narrative:
-- Who is pushing it:（Standard+ **二选一**：**(A)** 近 7d/14d + **≥2 可点开链接**或具名 handle+URL；**(B)** 首句声明「仅为传播渠道类型归纳，未做命名 KOL 清单」→ 须在 §2「仍缺」或监控清单写 **具体补证检索 query**。）
-- Is discourse growing or fading:
-- Founder / dev identity and social graph:
-- Signal vs noise judgment:
+- Who is pushing it:
+- Founder / dev social graph:
+- Independent propagation vs coordinated/reflexive promotion:
+- Signal vs noise:
 
-### 6. Risk Register
+Social evidence generates hypotheses; it does not prove product/value capture/security.
 
-- Technical risk:
-- Liquidity risk:
-- Dilution / unlock risk:
-- Governance / admin risk:
-- Regulatory risk:
-- Narrative collapse risk:
+---
 
-### 7. Why There May or May Not Be Money to Make
+## 9. Risk Register
 
+- Technical / security:
+- Liquidity / execution:
+- Dilution / unlock:
+- Governance / admin:
+- Counterparty / settlement:
+- Regulatory:
+- Narrative collapse:
+- Opportunity cost:
+
+---
+
+## 10. Why There May Be Money to Make
+
+- Mispricing hypothesis:
 - Bull case:
 - Bear case:
-- What has to happen for upside to continue:
-- Why this may already be crowded:
-- Mispricing hypothesis:
+- What has to happen:
+- Why the market may be wrong:
+- Why it may already be crowded/priced:
 
-### 7a. Investment thesis（独立段落，≥1y 可证伪）
+### 10a. Investment thesis
 
-- Cashflow / moat / sustainable share / regulatory carry（若无：**「本标的当前无独立 investment thesis，仅投机结构」** + 理由）
+- ≥1y sustainable cashflow / moat / share / regulatory carry, or explicitly: `no independent investment thesis; speculation only`.
 
-### 7b. Speculation thesis（独立段落，天～周；不得与 7a 混写成一个故事）
+### 10b. Speculation thesis
 
-- Catalyst / crowding / β / narrative rotation:
+- days/weeks catalyst / crowding / beta / narrative rotation / reflexivity.
 
-### 8. Participation Guidance for Leo
+Keep 10a and 10b separate.
 
-- Best fit bucket: core / satellite / speculative
-- Entry style: spot / staggered / event-driven / no trade
-- Initial size cap:
-- Scale-in condition:
-- **Invalidations / kill conditions (R2):** each row = metric + data source + threshold type (absolute / vs peer / MoM)
-  | Metric | Source | Threshold type | Trigger |
-  |--------|--------|------------------|---------|
-  | | | | |
-- Exit triggers:
+---
 
-### 9. Data Limitations
+## 11. Participation Guidance for Leo
+
+- Current personal-capital state:
+- Entry style:
+- Current bounded canary / preposition cap:
+- Next scale trigger:
+- Next reduce trigger:
+- Exit trigger:
+
+### Kill / invalidation table
+
+| Metric / fact | Source | Threshold type | Trigger |
+|---|---|---|---|
+| | | absolute / vs peer / MoM / direct fact | |
+
+For held positions, always return `HOLD / ADD-SCALE_REVIEW / REDUCE / EXIT`; do not end with generic WAIT after safe machine checks are available.
+
+---
+
+## 12. Independent Adversarial Review
+
+- Reviewer / model:
+- Hard-security contradiction: yes/no
+- Material factual contradiction:
+- Non-terminal disagreement:
+- Re-checks completed:
+- Effect on size/confidence:
+
+Independent review is evidence, not a vote. A bounded canary does not require consensus. Material scale should consume independent review.
+
+---
+
+## 13. Data Limitations
 
 - Unverified claims:
 - Missing datasets:
-- What would most improve confidence:
-
-### 10. Monitoring Checklist
-
-- Price / volume metrics:
-- Chain / holder metrics:
-- Fundamental / operating metrics:
-- Social / sentiment metrics:
-- Catalyst calendar:
-
-### 11. Behavioral Guardrail
-
-- Is this FOMO or analysis?
-- Am I anchored to someone else's screenshot / PnL?
-- What evidence would disconfirm the thesis?
-- What loss is tolerable if wrong?
-
-### Appendix A — Five-pillar self-check（Standard+，压缩表）
-
-| Pillar | Status (✅/⚠️/➖) | Evidence pointer (section or URL) |
-|--------|-------------------|-------------------------------------|
-| A Foundational | | |
-| B Technical | | |
-| C Tokenomics | | |
-| D Traction / PMF | | |
-| E Market structure | | |
-
-（定义见 `professional-pillars.md`。）
-
-### Appendix B — Scenarios（仅 `[Full DD]`）
-
-| Scenario | Key assumptions | Price or KPI triggers | Invalidation |
-|----------|-----------------|-------------------------|--------------|
-| Bear | | | |
-| Base | | | |
-| Bull | | | |
+- `AUTO_RESOLVABLE` items already attempted:
+- `TEMPORARILY_UNOBSERVABLE` sources and failovers:
+- Real `EXTERNAL_PENDING` triggers:
 
 ---
 
-## Mode B — Cross-Asset Comparison Report
+## 14. Monitoring Checklist
 
-### Metadata（必填）
-
-- **Depth tier:** `[Quick DD]` / Standard / `[Full DD]`
-- **Report as-of (UTC):**
-
-### Data provenance table（必填）
-
-| Claim | Source | As-of (UTC) | Confidence |
-|-------|--------|-------------|--------------|
-| Per-asset prices / returns | | | |
-| Cross-asset statistic (e.g. correlation) | | | |
-
-### 0. Recommendation First
-
-- Verdict:
-- Decision relevance for Leo: hedge / signal / narrative filter / no actionable edge
-- Primary takeaway:
-- Why now:
-
-### 1. Comparison Objective
-
-- What question is being answered:
-- Why these assets / markets are being compared:
-- What would count as a useful conclusion:
-
-### 2. Assets Compared
-
-- Asset A:
-  - canonical symbol:
-  - market / venue:
-  - asset class:
-  - quote currency:
-- Asset B:
-  - canonical symbol:
-  - market / venue:
-  - asset class:
-  - quote currency:
-- Additional assets if applicable:
-
-### 3. Window and Data Alignment
-
-- Comparison window:
-- Time granularity:
-- Session alignment method:
-- Data sources:
-- Symbol mapping / normalization notes:
-
-### 4. Unified Feature Table
-
-- Latest price:
-- Return over selected windows:
-- Volume / turnover:
-- Range / volatility:
-- Indicators actually used in the conclusion:
-
-### 5. Relationship Read
-
-- Correlation / relative return / regime contrast:
-- Lead-lag impression if any:
-- What appears structurally linked:
-- What appears coincidental:
-- What would invalidate the linkage claim:
-
-### 6. Market-Structure Caveats
-
-- Venue / liquidity differences:
-- Session-hour mismatch:
-- Leverage / funding / basis effects:
-- Macro / policy distortions:
-
-### 7. Actionability for Leo
-
-- How this helps:
-- What not to over-interpret:
-- Whether it changes positioning, monitoring, or nothing:
-
-### 7a / 7b. Investment vs Speculation framing（若对比服务于仓位决策）
-
-- **Investment:** …
-- **Speculation:** …
-
-### 8. Data Limitations
-
-- Missing datasets:
-- Alignment weaknesses:
-- Unverified assumptions:
-
-### 9. Monitoring Checklist
-
-- Trigger metrics:
-- Thresholds to re-check:
+- Price / executable route:
+- Holder / creator / LP:
+- Product / user / transaction:
+- Revenue / fee / buyback / value capture:
+- Supply / unlock:
+- Social / narrative:
 - Catalyst calendar:
-- Kill conditions for the relationship thesis:
+- Re-entry / scale / reduce / exit triggers:
 
-### Post-trade addendum（可选 · 公开 HTML）
-
-> 作者事后有实盘且愿意披露时追加；**须与报告 Verdict 分离**，写清边界。
-
-- **What happened（事实）：** venue · open/close UTC · size（可区间）· realized PnL（可选）
-- **Boundary（必填）：** 个人记录 · **非**对读者的交易指令 · 盈利 ≠ 验证 Verdict · 不构成投资建议
-- **Data freeze：** 正文行情/结论时点**不变**；后记不触发全文重拉 API（除非另开 revision）
-
-### Appendix A — Five-pillar self-check（可选；若对比涉及单标的深度则按 Mode A 支柱逐资产压缩）
+Notify on material semantic/action deltas, not clock-only refreshes.
 
 ---
 
-*对外交付时可删本文件路径，保留方法论与表格结构即可。*
+## 15. Five-Pillar Self-Check — Standard+
+
+| Pillar | Status | Evidence pointer |
+|---|---|---|
+| Foundational | ✅ / ⚠️ / ➖ | |
+| Technical / security | ✅ / ⚠️ / ➖ | |
+| Tokenomics / capital structure | ✅ / ⚠️ / ➖ | |
+| Traction / PMF / economics | ✅ / ⚠️ / ➖ | |
+| Market structure / distribution | ✅ / ⚠️ / ➖ | |
+
+---
+
+## 16. Full-DD Scenarios — Full only
+
+| Scenario | Probability | Assumptions | Terminal value / payoff | Falsifier |
+|---|---:|---|---:|---|
+| Bear | | | | |
+| Base | | | | |
+| Bull | | | | |
+
+For material scale also include portfolio concentration/correlation and fresh planned-size executable depth.
+
+---
+
+# Mode B — Cross-Asset Comparison
+
+Use the same Phase-A philosophy when the comparison informs a capital decision.
+
+## 0. Decision relevance
+- hedge / signal / narrative filter / relative-value / no actionable edge
+- exact assets / venues
+- aligned window
+- key relative metric
+- owner action, if any
+
+## 1. Alignment
+- symbols / identifiers:
+- currencies:
+- sessions:
+- time window / granularity:
+- data sources:
+
+## 2. Unified Feature Table
+- price / return:
+- volume / turnover:
+- volatility / range:
+- liquidity / depth:
+- fundamentals / onchain KPI:
+
+## 3. Relationship Read
+- correlation / relative return / regime:
+- structural link vs coincidence:
+- lead-lag hypothesis:
+- falsifier:
+
+## 4. Actionability
+- what changes in positioning/monitoring:
+- what not to over-interpret:
+- cost of delay:
+- owner action:
+
+## 5. Limitations / monitoring
+- missing data:
+- alignment weakness:
+- triggers:
+- kill conditions:
+
+---
+
+Public-facing exports may remove internal tool names and personal sizing details while preserving evidence, reasoning, and disclosure boundaries.
