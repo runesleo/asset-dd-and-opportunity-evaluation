@@ -71,6 +71,7 @@ jobs:
           print('SHA256_VERIFIED',sha,'bytes',len(raw))
           PY
           tar -xJf /tmp/axis_offline.tar.xz
+          python ci-patches/axis-offline-v2.py
           cd axis_mujoco_offline_20261018
           python -m unittest discover -s tests -v
           python run_benchmark.py --check-model
