@@ -1,0 +1,68 @@
+name: Axis offline MuJoCo one-shot physical verification
+on:
+  push:
+    branches:
+      - experiment/axis-offline-mujoco-one-shot-20261018
+    paths:
+      - .github/workflows/axis-mujoco-one-shot.yml
+      - experiments/axis-mujoco-20261018/**
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout isolated experiment branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install official MuJoCo runtime
+        run: python -m pip install 'mujoco==3.3.7' numpy
+      - name: Prove actual physics engine
+        run: |
+          python - <<'PY'
+          import mujoco
+          xml='<mujoco model="smoke"><option timestep="0.002" gravity="0 0 -9.81"/><worldbody><geom name="floor" type="plane" size="1 1 .1"/><body pos="0 0 .5"><freejoint/><geom name="ball" size=".05" type="sphere" mass="1"/></body></worldbody></mujoco>'
+          m=mujoco.MjModel.from_xml_string(xml)
+          d=mujoco.MjData(m)
+          for i in range(100):
+              mujoco.mj_step(m,d)
+          print('MUJOCO_PHYSICS_SMOKE_PASS',mujoco.__version__,'steps=100','sim_time=',d.time,'contacts=',d.ncon)
+          assert d.time > 0.19
+          PY
+      - name: Run supplied isolated benchmark when payload present
+        run: |
+          set -euo pipefail
+          if [ ! -f experiments/axis-mujoco-20261018/project.zip.b64 ]; then
+            echo 'PAYLOAD_PENDING: Physics runtime verified; 20-trial experiment not yet uploaded'
+            exit 0
+          fi
+          base64 --decode experiments/axis-mujoco-20261018/project.zip.b64 > /tmp/axis_offline.zip
+          echo 'a0d85eec05f614a37d734ce176b12021e390a6d837102b701c4fa64f5e272607  /tmp/axis_offline.zip' | sha256sum -c -
+          unzip -q /tmp/axis_offline.zip
+          cd axis_mujoco_offline_20261018
+          python -m unittest discover -s tests -v
+          python run_benchmark.py --check-model
+          python run_benchmark.py --trials 20 --seed 20261018 --out results/physics_20.json
+          python run_benchmark.py --trials 20 --seed 20261018 --disable-gripper --out results/disabled_gripper_20.json
+          python - <<'PY'
+          import json
+          good=json.load(open('results/physics_20.json'))
+          ctrl=json.load(open('results/disabled_gripper_20.json'))
+          print('GATE: successful_episodes=',good['successes'],'/',good['trials'],'negative_control=',ctrl['successes'],'/',ctrl['trials'])
+          assert good['physics_executed'] and ctrl['physics_executed']
+          assert ctrl['successes']==0,'NEGATIVE_CONTROL_FALSE_POSITIVE'
+          PY
+      - name: Preserve physical run receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: axis-offline-physics-receipts
+          path: axis_mujoco_offline_20261018/results/*.json
+          if-no-files-found: ignore
+          retention-days: 3
