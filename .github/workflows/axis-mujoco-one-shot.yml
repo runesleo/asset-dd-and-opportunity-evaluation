@@ -81,6 +81,8 @@ jobs:
           python run_benchmark.py --check-model
           python run_benchmark.py --trials 20 --seed 20261018 --out results/physics_20.json
           python run_benchmark.py --trials 20 --seed 20261080 --out results/two_item_holdout_20.json
+          python run_benchmark.py --trials 40 --seed 20261200 --out results/two_item_independent_40.json
+          python run_benchmark.py --trials 20 --seed 20261300 --perception-sigma 0.006 --out results/two_item_6mm_noise_20.json
           python run_benchmark.py --trials 20 --seed 20261018 --disable-gripper --out results/disabled_gripper_20.json
           python - <<'PY'
           import json
@@ -89,6 +91,11 @@ jobs:
           print('GATE: successful_episodes=',good['successes'],'/',good['trials'],'negative_control=',ctrl['successes'],'/',ctrl['trials'])
           assert good['physics_executed'] and ctrl['physics_executed']
           assert ctrl['successes']==0,'NEGATIVE_CONTROL_FALSE_POSITIVE'
+          independent=json.load(open('results/two_item_independent_40.json'))
+          stress=json.load(open('results/two_item_6mm_noise_20.json'))
+          print('INDEPENDENT_PHYSICS_VALIDATION',independent['successes'],'/',independent['trials'],'at 2mm sensing; 6mm noise',stress['successes'],'/',stress['trials'])
+          print('THRESHOLD_80_PERCENT_40_TRIALS', 'PASS' if independent['successes']>=32 else 'NOT_MET')
+          assert independent['physics_executed'] and stress['physics_executed'] and independent['mjcf_sha256']==good['mjcf_sha256']
           PY
       - name: Preserve physical run receipts
         if: always()
