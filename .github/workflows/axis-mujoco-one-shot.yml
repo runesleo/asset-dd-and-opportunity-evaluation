@@ -73,10 +73,13 @@ jobs:
           tar -xJf /tmp/axis_offline.tar.xz
           python ci-patches/axis-offline-v2.py
           python ci-patches/axis-sweep-v3.py
+          python ci-patches/axis-holdout-v4.py
+          python ci-patches/axis-two-item-v4.py
           cd axis_mujoco_offline_20261018
           python -m unittest discover -s tests -v
           python run_benchmark.py --check-model
           python run_benchmark.py --trials 20 --seed 20261018 --out results/physics_20.json
+          python run_benchmark.py --trials 20 --seed 20261060 --out results/two_item_holdout_20.json
           python run_benchmark.py --trials 20 --seed 20261018 --disable-gripper --out results/disabled_gripper_20.json
           python - <<'PY'
           import json
