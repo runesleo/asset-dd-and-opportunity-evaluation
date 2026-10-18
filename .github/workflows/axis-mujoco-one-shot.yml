@@ -38,13 +38,39 @@ jobs:
       - name: Run supplied isolated benchmark when payload present
         run: |
           set -euo pipefail
-          if [ ! -f experiments/axis-mujoco-20261018/project.zip.b64 ]; then
-            echo 'PAYLOAD_PENDING: Physics runtime verified; 20-trial experiment not yet uploaded'
+          if [ ! -f experiments/axis-mujoco-20261018/project.tar.xz.b64 ]; then
+            echo 'PAYLOAD_PENDING: offline physics test not yet staged'
             exit 0
           fi
-          base64 --decode experiments/axis-mujoco-20261018/project.zip.b64 > /tmp/axis_offline.zip
-          echo 'a0d85eec05f614a37d734ce176b12021e390a6d837102b701c4fa64f5e272607  /tmp/axis_offline.zip' | sha256sum -c -
-          unzip -q /tmp/axis_offline.zip
+          python - <<'PY'
+          import base64,hashlib
+          from pathlib import Path
+          s=Path('experiments/axis-mujoco-20261018/project.tar.xz.b64').read_text().strip()
+          sha='d1132f9fe479ecfef49b443d1ad6e6f03fbb43e3a20a38cdb238982e81894aff'
+          def accepted(b): return hashlib.sha256(b).hexdigest()==sha
+          raw=None
+          if len(s)%4==0:
+              try:
+                  v=base64.b64decode(s,validate=True)
+                  if accepted(v):raw=v
+              except ValueError:pass
+          elif len(s)%4==3:
+              chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+              for i in range(len(s)+1):
+                  left,right=s[:i],s[i:]
+                  for ch in chars:
+                      try:v=base64.b64decode(left+ch+right,validate=True)
+                      except ValueError:continue
+                      if accepted(v):
+                          raw=v
+                          print('RECOVERED_SINGLE_MISSING_BASE64_CHARACTER',i)
+                          break
+                  if raw is not None:break
+          if raw is None: raise SystemExit('PAYLOAD_SHA_MISMATCH')
+          Path('/tmp/axis_offline.tar.xz').write_bytes(raw)
+          print('SHA256_VERIFIED',sha,'bytes',len(raw))
+          PY
+          tar -xJf /tmp/axis_offline.tar.xz
           cd axis_mujoco_offline_20261018
           python -m unittest discover -s tests -v
           python run_benchmark.py --check-model
